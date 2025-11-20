@@ -49,10 +49,10 @@
       font-weight: bold;
     }
 
-    /* FIXED: Controller button moved outside search button */
+    /* Controller button */
     #controllerBtn {
       position: absolute;
-      top: 140px; /* adjust if needed */
+      top: 140px;
       right: 33%;
       width: 48px;
       height: 48px;
@@ -64,7 +64,6 @@
       font-weight: bold;
       color: black;
 
-      /* neon glow */
       box-shadow:
         0 0 10px #00eaff,
         0 0 20px #00eaff,
@@ -102,6 +101,11 @@
       margin-top: 40px;
       font-size: 22px;
     }
+
+    iframe {
+      border-radius: 12px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -111,24 +115,24 @@
   <input type="text" id="searchBox" placeholder="Search...">
   <br>
 
-  <!-- FIXED: Search button now works -->
   <button id="searchBtn">Search</button>
-
-  <!-- FIXED: Controller button OUTSIDE search button -->
   <button id="controllerBtn">🎮</button>
 
   <div id="resultBox"></div>
 
   <script>
-    // SEARCH FUNCTION FIXED
+    // GOOGLE SEARCH INSIDE WEBSITE
     document.getElementById("searchBtn").addEventListener("click", function () {
       let query = document.getElementById("searchBox").value.trim();
 
       if (query === "") {
         document.getElementById("resultBox").innerHTML = "Please type something to search.";
       } else {
-        document.getElementById("resultBox").innerHTML =
-          "You searched for: <strong>" + query + "</strong>";
+        let googleURL = "https://www.google.com/search?q=" + encodeURIComponent(query);
+
+        document.getElementById("resultBox").innerHTML = `
+          <iframe src="${googleURL}" style="width: 90%; height: 600px;"></iframe>
+        `;
       }
     });
 
